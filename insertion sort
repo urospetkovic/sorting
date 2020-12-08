@@ -1,0 +1,22 @@
+# insertion sort
+
+num_list = [12, 45 ,75, 3, 88, 96, 21, 46, 79, 4, 1]
+
+
+def compare(x):  # compares two neighbour numbers
+    if num_list[x] > num_list[x+1]:
+        num_list[x], num_list[x+1] = num_list[x+1], num_list[x]  # swap places if needed
+        if x > 0:
+            compare(x-1)
+    return num_list
+        
+def insertion_sort(num_list):
+    for x in range(len(num_list)-1):
+        compare(x)
+    return num_list
+    
+        
+            
+        
+insertion_sort(num_list)
+print(num_list)
