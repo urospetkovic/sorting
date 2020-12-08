@@ -1,6 +1,23 @@
 num_list = [12, 45 ,75, 3, 88, 96, 21, 46, 79, 4, 1]
 
 h = 3
+def compare(x):  # compares two neighbour numbers
+    if x+h < len(num_list):
+        print(num_list[x])
+        if num_list[x] > num_list[x+h]:
+            num_list[x], num_list[x+h] = num_list[x+h], num_list[x]  # swap places if needed
+            print(num_list)
+            if x > 0:
+                compare(x-h)
+    else:
+        pass
+        
+    return num_list
+        
+def insertion_sort(num_list):
+    for x in range(len(num_list)-1):
+        #print(x)
+        compare(x)
+    return num_list
 
-for x in range(0, len(num_list), h):
-    print(num_list[x])
+insertion_sort(num_list)
