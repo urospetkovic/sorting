@@ -1,0 +1,6 @@
+num_list = [12, 45 ,75, 3, 88, 96, 21, 46, 79, 4, 1]
+
+h = 3
+
+for x in range(0, len(num_list), h):
+    print(num_list[x])
