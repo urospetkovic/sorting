@@ -1,23 +1,30 @@
-num_list = [12, 45 ,75, 3, 88, 96, 21, 46, 79, 4, 1]
+import random
 
-h = 3
-def compare(x):  # compares two neighbour numbers
+num_list = []
+for x in range(20):
+    num_list.append(random.randint(1, 200))
+print(num_list)
+
+
+def compare(x, h):  # compares two numbers between 'h'
     if x+h < len(num_list):
-        print(num_list[x])
+        
         if num_list[x] > num_list[x+h]:
             num_list[x], num_list[x+h] = num_list[x+h], num_list[x]  # swap places if needed
-            print(num_list)
-            if x > 0:
-                compare(x-h)
-    else:
-        pass
+            
+            if x-h >= 0:   
+                compare(x-h, h)  # compare to next 'h' to the left 
         
     return num_list
         
-def insertion_sort(num_list):
-    for x in range(len(num_list)-1):
-        #print(x)
-        compare(x)
-    return num_list
-
-insertion_sort(num_list)
+def insertion_sort(num_list, h):
+    for x in range(len(num_list)):
+        compare(x, h)
+        
+        
+h = 7
+for x in range(3):
+    insertion_sort(num_list, h)
+    h = int((h-1)/2)
+    
+print(num_list)
