@@ -1,23 +1,30 @@
 import random
-
+import time
 num_list = []
-for x in range(20):
-    num_list.append(random.randint(1, 200))
-print(num_list)
+for x in range(1000):
+    num_list.append(random.randint(1, 1000))
+test = sorted(num_list)
+
+
 def compare(x):  # compares two neighbour numbers
-    if num_list[x] > num_list[x+1]:
-        num_list[x], num_list[x+1] = num_list[x+1], num_list[x]  # swap places if needed
-        if x > 0:
-            compare(x-1)  # if not first in list, check one behind 
-    return num_list
-        
+    while x > -1:
+        if num_list[x] > num_list[x + 1]:
+            num_list[x], num_list[x + 1] = num_list[x + 1], num_list[x]  # swap places if needed
+        x -= 1  # if not first in list, compare with one behind
+
+
 def insertion_sort(num_list):
-    for x in range(len(num_list)-1):
+    for x in range(len(num_list) - 1):
         compare(x)
-    return num_list
-    
-        
-            
-        
+
+
+start = time.time()
 insertion_sort(num_list)
-print(num_list)
+end = time.time()
+time_elapsed = float(end - start).__round__(3)
+print(time_elapsed)
+
+if test == num_list:
+    print(True)
+else:
+    print(False)
