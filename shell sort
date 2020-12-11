@@ -1,30 +1,35 @@
 import random
+import time
 
 num_list = []
-for x in range(20):
-    num_list.append(random.randint(1, 200))
-print(num_list)
+for x in range(1000):
+    num_list.append(random.randint(1, 1000))
+test = sorted(num_list)
 
 
-def compare(x, h):  # compares two numbers between 'h'
-    if x+h < len(num_list):
-        
-        if num_list[x] > num_list[x+h]:
-            num_list[x], num_list[x+h] = num_list[x+h], num_list[x]  # swap places if needed
-            
-            if x-h >= 0:   
-                compare(x-h, h)  # compare to next 'h' to the left 
-        
-    return num_list
-        
-def insertion_sort(num_list, h):
-    for x in range(len(num_list)):
+def compare(x, h):  # compares two neighbour numbers
+    while x > -1 and x + h < len(num_list)+1:
+        if num_list[x] > num_list[x + h]:
+            num_list[x], num_list[x + h] = num_list[x + h], num_list[x]  # swap places if needed
+        x -= h  # if not first in list, compare with one behind
+
+
+def shell_sort(num_list):
+    h = 9
+    for x in range(len(num_list) - 1):
         compare(x, h)
-        
-        
-h = 7
-for x in range(3):
-    insertion_sort(num_list, h)
-    h = int((h-1)/2)
-    
-print(num_list)
+        h -= int((h - 1) / 2)
+        if h == 2:
+            h -= 1
+
+
+start = time.time()
+shell_sort(num_list)
+end = time.time()
+elapsed = float(end - start).__round__(3)
+print(elapsed)
+if test == num_list:
+    print(True)
+else:
+    print(False)
+
