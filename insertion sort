@@ -7,10 +7,11 @@ test = sorted(num_list)
 
 
 def compare(x):  # compares two neighbour numbers
-    while x > -1:
+    while num_list[x] > num_list[x + 1]:
         if num_list[x] > num_list[x + 1]:
             num_list[x], num_list[x + 1] = num_list[x + 1], num_list[x]  # swap places if needed
-        x -= 1  # if not first in list, compare with one behind
+            if x > 0:
+                x -= 1  # if not first in list, compare if one behind is smaller
 
 
 def insertion_sort(num_list):
